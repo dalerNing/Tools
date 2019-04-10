@@ -1,5 +1,4 @@
 <center>Docker 核心概念及基本操作</center>
-
 -----
 [TOC]
 
@@ -21,27 +20,13 @@
 
 ![](image/3.png)
 
-# 3. Docker Command
+# 3. Docker 常用命令
 
-
-```sh
-docker images			# List images
-
-docker rmi				# Remove one or more images
-
-docker pull				# Pull an image or a repository from a registry
-docker push				# Push an image or a repository to a registry
-
-docker load				# Load an image from a tar archive or STDIN
-docker save				# Save one or more images to a tar archive
-docker search			# Search the Docker Hub for images
-
-# Management Commands
-docker image CMD 		# Mange images
-```
 
 ```bash
-docker ps				# List containers
+### Containers Commands ###
+docker ps				# List runing containers
+docker ps -a			# List all containers 
 
 docker rm         		# Remove one or more containers
 
@@ -54,8 +39,40 @@ docker kill        		# Kill one or more running containers
 docker start       		# Start one or more stopped containers
 docker stop        		# Stop one or more running containers
 docker restart			# Restart one or more containers
-
 # Management Commands
 docker container CMD	# Manage containers
+
+### Images Commands ###
+docker images			# List images
+
+docker rmi				# Remove one or more images
+
+docker pull				# Pull an image or a repository from a registry
+docker push				# Push an image or a repository to a registry
+
+docker load				# Load an image from a tar archive or STDIN
+docker save				# Save one or more images to a tar archive
+docker search			# Search the Docker Hub for images
+# Management Commands
+docker image CMD 		# Mange images
+```
+
+```bash
+# 创建并运行一个容器
+docker run --runtime nvidia -it -p 8888:8888 -p 6006:6006 -v $(pwd)/Tensorflow:/home/Tensorflow --name tf tensorflow/tensorflow:latest-gpu-py3 bash
+
+# 下次运行时
+docker start -i tf
+
+# 参数解析
+docker run 								# creat and run a container
+--runtime nvidia						# nvidia-docker
+-it										# for interactive
+-p 8888:8888							# for Jupyter notebook
+-p 6006:6006							# for Tensorboard
+-v $(pwd)/Tensorflow:/home/Tensorflow	# shared floders
+--name tf								# container name
+tensorflow/tensorflow:latest-gpu-py3	# image name
+bash 									# command run on container
 ```
 
